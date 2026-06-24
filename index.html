@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chrysippus & the Stoics — the logic of propositions</title>
+<meta name="description" content="LOGIKĒ IV — Chrysippus of Soli (c. 279–206 BCE) and the Stoics. While Aristotle reasoned about categories ('all men…'), the Stoics reasoned about whole statements joined by connectives — and, or, not, if-then — the first PROPOSITIONAL logic, the direct ancestor of Boolean algebra and the logic gate. A proposition is true or false (the bit); the connectives are the operators; Philo of Megara's conditional is the material conditional (false only when antecedent true, consequent false) — the modern truth table, ~2000 years early. Live truth tables and the five indemonstrables (modus ponens et al). Honest: almost all texts lost; reconstructed from critics; overlooked for two millennia, then vindicated. David Lee Wise, two-layer honest.">
+<style>
+  :root{--bg:#0c0f17;--panel:#121622;--panel2:#19202f;--edge:#2a3346;--ink:#ede6d6;--dim:#b3ad9a;--faint:#7c7660;
+    --ochre:#d9b66a;--ochre2:#f0d79a;--proof:#5ad1ff;--proof2:#a7e6ff;--T:#7fe0a0;--F:#fb7185;--amber:#fbbf24;--ember:#fb923c;
+    --mono:'SFMono-Regular',ui-monospace,'Cascadia Code',Menlo,Consolas,monospace;--serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.58;background-image:radial-gradient(1100px 560px at 75% -10%,#1c2436 0%,transparent 55%),radial-gradient(900px 500px at 0% 100%,#14110a 0%,transparent 55%);}
+  .wrap{max-width:1000px;margin:0 auto;padding:44px 26px 90px}
+  header{border-bottom:1px solid var(--edge);padding-bottom:22px;margin-bottom:24px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ochre);opacity:.95}
+  h1{font-family:Georgia,serif;font-size:36px;line-height:1.08;margin:.3em 0 .14em;font-weight:600}h1 em{color:var(--ochre2);font-style:italic}
+  .who{font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.04em}
+  .sub{color:var(--dim);font-size:16px;max-width:74ch;margin-top:14px}.sub b{color:var(--ink)}
+  .verdicts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:22px 0}@media(max-width:720px){.verdicts{grid-template-columns:1fr}}
+  .vc{border:1px solid var(--edge);border-radius:11px;padding:13px 15px;border-top-width:3px;background:rgba(18,22,34,.6)}
+  .vc .badge{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em}
+  .vc.s{border-top-color:var(--T)}.vc.s .badge{color:var(--T)} .vc.m{border-top-color:var(--amber)}.vc.m .badge{color:var(--amber)} .vc.f{border-top-color:var(--ember)}.vc.f .badge{color:var(--ember)}
+  .vc p{font-size:12px;color:var(--dim);margin:6px 0 0;line-height:1.45}.vc p b{color:var(--ink)}
+  section{margin:36px 0}
+  h2{font-size:13px;font-family:var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--ochre2);border-left:2px solid var(--ochre);padding-left:11px;margin:0 0 6px}
+  .lede{color:var(--dim);font-size:15px;margin:0 0 18px;max-width:80ch}
+  .panel{background:linear-gradient(180deg,var(--panel),#0a0d14);border:1px solid var(--edge);border-radius:14px;padding:20px;box-shadow:0 24px 60px -40px #000}
+  .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:16px}
+  .tgl{font-family:var(--mono);font-size:13px;font-weight:700;padding:8px 16px;border-radius:9px;cursor:pointer;border:1px solid var(--edge);min-width:104px;text-align:center}
+  .tgl.t{background:rgba(127,224,160,.16);color:var(--T);border-color:#2f6f4a}.tgl.f{background:rgba(251,113,133,.14);color:var(--F);border-color:#5c1f2e}
+  .ops{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}@media(max-width:680px){.ops{grid-template-columns:repeat(2,1fr)}}
+  .op{border:1px solid var(--edge);border-radius:10px;padding:12px;text-align:center;background:rgba(0,0,0,.16)}
+  .op .nm{font-family:var(--mono);font-size:11px;color:var(--dim)}.op .sym{font-family:var(--mono);font-size:15px;color:var(--ochre2);margin:4px 0}
+  .op .val{font-family:var(--mono);font-size:22px;font-weight:700;margin-top:4px}.op .val.t{color:var(--T)}.op .val.f{color:var(--F)}
+  table.tt{border-collapse:collapse;font-family:var(--mono);font-size:13px;margin-top:14px;width:100%}
+  table.tt th,table.tt td{border:1px solid var(--edge);padding:6px 8px;text-align:center}table.tt th{color:var(--ochre2);font-size:11px}
+  table.tt td.t{color:var(--T)}table.tt td.f{color:var(--F)}table.tt tr.hot td{background:rgba(217,182,106,.10)}
+  .ind{display:flex;flex-direction:column;gap:8px}
+  .schema{border:1px solid var(--edge);border-radius:10px;padding:11px 14px;background:rgba(0,0,0,.14);font-family:Georgia,serif;font-size:14.5px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .schema .nm{font-family:var(--mono);font-size:10px;color:var(--faint);min-width:90px}
+  .schema .fire{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:6px}.schema .fire.on{background:rgba(127,224,160,.16);color:var(--T)}.schema .fire.off{background:#19202f;color:var(--faint)}
+  .note{color:var(--dim);font-size:13.5px;border-left:2px solid var(--edge);padding-left:13px;margin:16px 0 0}.note b{color:var(--ink)}
+  footer{margin-top:44px;border-top:1px solid var(--edge);padding-top:18px;color:var(--faint);font-family:var(--mono);font-size:11px;line-height:1.7}
+  footer a,.bar2 a{color:var(--ochre)}.bar2{font-family:var(--mono);font-size:11.5px;margin-bottom:16px}.bar2 a{text-decoration:none;border-bottom:1px dotted #4a4126}
+  code{font-family:var(--mono);color:var(--ochre2);background:#15120a;padding:1px 5px;border-radius:5px}
+  blockquote{margin:14px 0;padding:10px 16px;border-left:3px solid var(--ochre);color:var(--ink);font-style:italic;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="bar2"><a href="https://davidwise01.github.io/ud0/">◄ UD0</a> &nbsp; <a href="https://davidwise01.github.io/euclid/">← Euclid</a> &nbsp; LOGIKĒ · IV</div>
+<header>
+  <div class="kicker">LOGIKĒ · IV · the logic of whole statements</div>
+  <h1>Chrysippus &amp; the <em>Stoics</em></h1>
+  <div class="who">Chrysippus of Soli · c. 279 – c. 206 BCE · "if there had been no Chrysippus, there would have been no Stoa"</div>
+  <div class="sub">Aristotle reasoned about <em>categories</em> — all men, some Greeks, no mortals. The Stoics did something the gate would need and he could not give: they reasoned about whole <b>statements</b> — true-or-false propositions joined by <b>connectives</b>: <em>and, or, not, if… then</em>. A proposition is true or false — that is the <b>bit</b>. The connectives are the <b>operators</b>. And Chrysippus's rules of inference are how proofs <em>compute</em>. This is propositional logic, born in Athens, and it — not Aristotle's — is the logic your processor runs on.</div>
+</header>
+<div class="verdicts">
+  <div class="vc s"><span class="badge">✓ STRONG</span><p><b>They built propositional logic.</b> Connectives, a truth-functional conditional, and inference rules — recognised by modern logicians (Łukasiewicz, Mates, Bobzien) as the genuine ancestor of <b>Boolean logic and the gate</b>.</p></div>
+  <div class="vc m"><span class="badge">◐ RECONSTRUCTED</span><p><b>Almost all of it is lost.</b> Chrysippus wrote 700+ books; <b>none survive whole</b>. We rebuild Stoic logic from fragments and hostile critics (Sextus Empiricus, Diogenes Laertius).</p></div>
+  <div class="vc f"><span class="badge">◔ VINDICATED LATE</span><p><b>Dismissed for 2,000 years.</b> Aristotle's logic was held superior; only in the <b>20th century</b> was it seen that the Stoics had the deeper, computing-relevant system first.</p></div>
+</div>
+
+<section>
+  <h2>I · The connectives — and the first truth table</h2>
+  <p class="lede">Set two propositions <code>P</code> and <code>Q</code> to true or false, and watch the connectives compute their value. The star is the <b>conditional</b>: Philo of Megara taught that "if P then Q" is false in <em>exactly one</em> case — P true, Q false — and true otherwise. That is the <b>material conditional</b>, the modern truth table, written down around 300 BCE. Every box below is a logic gate that wouldn't be built in silicon for 2,200 years.</p>
+  <div class="panel">
+    <div class="controls">
+      <span class="mono" style="font-size:11px;color:var(--faint)">P =</span><div class="tgl t" id="P">TRUE</div>
+      <span class="mono" style="font-size:11px;color:var(--faint)">Q =</span><div class="tgl f" id="Q">FALSE</div>
+      <span class="mono" style="font-size:11px;color:var(--faint)">— click to toggle</span>
+    </div>
+    <div class="ops" id="ops"></div>
+    <table class="tt" id="ttable"></table>
+    <div class="note">The Stoics called the four cases the only thing that matters about a connective — its value in every row. They had, in all but the name, <b>truth-functional semantics</b>: the meaning of "and / or / if" <em>is</em> its table. Frege and Wittgenstein would re-derive this; Shannon would weld it to circuits.</div>
+  </div>
+</section>
+
+<section>
+  <h2>II · The five indemonstrables</h2>
+  <p class="lede">From those connectives Chrysippus distilled five basic, self-evident inference patterns — the <b>indemonstrables</b> — out of which all valid argument is built. They are the first <em>natural-deduction rules</em> in history, and you'll recognise them: they're how a proof, or a circuit, moves from premises to a conclusion. With the P, Q above set, the ones whose premises currently hold light up.</p>
+  <div class="panel">
+    <div class="ind" id="ind"></div>
+    <blockquote>"The first indemonstrable: if the first, then the second; but the first; therefore the second." <span style="color:var(--faint);font-style:normal;font-size:12px">— Sextus Empiricus, reporting Chrysippus (modus ponens)</span></blockquote>
+  </div>
+</section>
+
+<section>
+  <h2>III · Lost, dismissed, vindicated</h2>
+  <p class="lede">Chrysippus was the second founder of Stoicism and, by reputation, the greatest logician of antiquity — Diogenes Laertius credits him with <b>705 books</b>. They are <em>all gone</em>. What we know of the most consequential logic before Frege survives only because critics quoted it to argue against it.</p>
+  <p class="note" style="border-color:var(--amber)"><b style="color:var(--amber)">Gate kept on.</b> For two thousand years the verdict was that Aristotle's term logic was <em>real</em> logic and the Stoic stuff was a lesser cousin — so it was neglected, and the texts perished. Only in the <b>20th century</b>, when propositional logic became the spine of mathematics and then of computing, did logicians (Łukasiewicz, Benson Mates, Susanne Bobzien) realise the Stoics had got there first and got there deeper. So treat the precise truth-functional reading with care: it's a faithful but partly <em>modern reconstruction</em> from fragments, not a surviving Stoic textbook. The honest shape of this one is a first that was forgotten — and turned out to be the more important first.</p>
+</section>
+
+<footer>
+  CHRYSIPPUS &amp; THE STOICS · LOGIKĒ IV · two-layer honest<br>
+  live truth tables (∧ ∨ ¬ ⊻ →; material conditional false only when P∧¬Q — Philo of Megara) · the five indemonstrables (modus ponens, modus tollens, &amp;c.) firing on the current P,Q<br>
+  Stoic propositional logic reconstructed from Sextus Empiricus &amp; Diogenes Laertius · vindicated 20th c. (Łukasiewicz, Mates, Bobzien) · the ancestor of Boolean logic<br>
+  ← <a href="https://davidwise01.github.io/euclid/">Euclid</a> · next → Ramon Llull (the first logic machine) · Leibniz · Boole · into the gate<br>
+  LOGIKĒ · the lineage of logical mathematics · governor David Lee Wise · CC-BY-ND-4.0
+</footer>
+</div>
+<script>
+"use strict";
+(function(){
+  let P=true,Q=false;
+  const OPS=[
+    {nm:'NOT P',sym:'¬P',f:()=>!P},
+    {nm:'AND',sym:'P ∧ Q',f:()=>P&&Q},
+    {nm:'OR (incl.)',sym:'P ∨ Q',f:()=>P||Q},
+    {nm:'OR (excl.)',sym:'P ⊻ Q',f:()=>P!==Q},
+    {nm:'CONDITIONAL',sym:'P → Q',f:()=>(!P)||Q},
+  ];
+  function renderOps(){
+    document.getElementById('ops').innerHTML=OPS.map(o=>{const v=o.f();
+      return '<div class="op"><div class="nm">'+o.nm+'</div><div class="sym">'+o.sym+'</div><div class="val '+(v?'t':'f')+'">'+(v?'T':'F')+'</div></div>';}).join('');
+  }
+  function renderTable(){
+    const rows=[[true,true],[true,false],[false,true],[false,false]];
+    let html='<tr><th>P</th><th>Q</th><th>¬P</th><th>P∧Q</th><th>P∨Q</th><th>P⊻Q</th><th>P→Q</th></tr>';
+    rows.forEach(([p,q])=>{const hot=(p===P&&q===Q);
+      const cells=[p,q,!p,p&&q,p||q,p!==q,(!p)||q];
+      html+='<tr class="'+(hot?'hot':'')+'">'+cells.map(c=>'<td class="'+(c?'t':'f')+'">'+(c?'T':'F')+'</td>').join('')+'</tr>';});
+    document.getElementById('ttable').innerHTML=html;
+  }
+  // five indemonstrables: premises (functions of P,Q) -> conclusion text; "fires" if all premises true
+  const IND=[
+    {nm:'① modus ponens',txt:'if P then Q; and P; ∴ Q',prem:()=>((!P)||Q)&&P,con:'Q'},
+    {nm:'② modus tollens',txt:'if P then Q; but not Q; ∴ not P',prem:()=>((!P)||Q)&&(!Q),con:'¬P'},
+    {nm:'③ conj. denial',txt:'not (P and Q); but P; ∴ not Q',prem:()=>(!(P&&Q))&&P,con:'¬Q'},
+    {nm:'④ excl. disj.',txt:'either P or Q; and P; ∴ not Q',prem:()=>(P!==Q)&&P,con:'¬Q'},
+    {nm:'⑤ disj. syll.',txt:'either P or Q; but not Q; ∴ P',prem:()=>(P!==Q)&&(!Q),con:'P'},
+  ];
+  function renderInd(){
+    document.getElementById('ind').innerHTML=IND.map(s=>{const on=s.prem();
+      return '<div class="schema"><span class="nm">'+s.nm+'</span><span style="flex:1">'+s.txt+'</span><span class="fire '+(on?'on':'off')+'">'+(on?'premises hold ✓':'premises don’t hold')+'</span></div>';}).join('');
+  }
+  function all(){renderOps();renderTable();renderInd();}
+  document.getElementById('P').onclick=function(){P=!P;this.className='tgl '+(P?'t':'f');this.textContent=P?'TRUE':'FALSE';all();};
+  document.getElementById('Q').onclick=function(){Q=!Q;this.className='tgl '+(Q?'t':'f');this.textContent=Q?'TRUE':'FALSE';all();};
+  all();
+})();
+</script>
+</body>
+</html>
